@@ -1,4 +1,4 @@
-const category_controller = require('../controllers/category.controller');
+ const category_controller = require('../controllers/category.controller');
 const auth_middleware = require('../middlewares/auth.middleware');
 
 module.exports = (app) => {
