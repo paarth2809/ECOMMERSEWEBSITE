@@ -16,6 +16,7 @@ exports.signup = async (req, res) => {
     try {
         const user = await user_model.create(userObj);
 
+        // don't want password to be present in response object
         const resObj = {
             name: user.name,
             userId: user.userId,

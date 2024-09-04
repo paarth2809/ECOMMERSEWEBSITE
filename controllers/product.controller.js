@@ -3,6 +3,19 @@ const category_model = require('../models/category.model');
 
 // Create product
 exports.addProduct = async (req, res) => {
+    try{
+        const category=req.body.category;
+        const category_obj=await category_model.find({name: category})
+        if(category_obj.length==0) res.status(400).send({
+            message: "provided category doesn't exist so can't add product"
+        })
+    }
+    catch(err){
+        console.log("Error while adding product:",err)
+        res.status(500).send({
+            message: "error while creating product"
+        })
+    }
     const product_obj = req.body;
 
     try {

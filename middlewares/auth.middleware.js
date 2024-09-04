@@ -94,10 +94,21 @@ const verifyToken = (req, res, next) => {
 const isAdmin=(req,res,next)=>{
     const user=req.user
     if(user && user.userType=="ADMIN")
-        next()
+        next();
     else{
         return res.status(403).send({
             message: "only admin user allowed"
+        })
+    }
+}
+
+const isValidUser=(req,res,next)=>{
+    const user=req.user
+    if(user && user.name==req.body.user_name)
+        next();
+    else{
+        return res.status(403).send({
+            message: "user with provided name don't exist"
         })
     }
 }
@@ -106,5 +117,6 @@ module.exports = {
     verifySignUpBody: verifySignUpBody,
     verifySignInBody: verifySignInBody,
     verifyToken: verifyToken,
-    isAdmin: isAdmin
+    isAdmin: isAdmin,
+    isValidUser: isValidUser
 };

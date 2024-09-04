@@ -100,3 +100,34 @@ exports.updateCart = async (req, res) => {
         });
     }
 };
+
+
+exports.addProductToCart = async (req, res) => {
+    try {
+        const user = req.body.user_name;
+        const product = req.body.products;
+
+        const cart = await cart_model.findOne({ user_name: user });
+
+        if (!cart) {
+            return res.status(404).send({
+                message: "Cart with provided user name not present"
+            });
+        }
+
+        for(i=0;i<product.length;i++){
+            cart['products'].push(product[i])
+        }
+
+        await cart.save();
+        res.status(200).send({
+            message: 'items successfully added to cart',
+            cart: cart
+        });
+    } catch (err) {
+        console.error("Error while adding items to cart:", err);
+        res.status(500).send({
+            message: "Error while adding items to  cart"
+        });
+    }
+};

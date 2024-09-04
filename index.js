@@ -8,6 +8,7 @@ const bcrypt = require('bcryptjs');
 const app = express();
 app.use(express.json());
 
+// stitch route to server
 require('./routes/auth.route')(app);
 require('./routes/category.route')(app);
 require('./routes/product.route')(app);
@@ -17,7 +18,7 @@ app.listen(server_config.PORT, () => {
     console.log("Server has started on port number:", server_config.PORT);
 });
 
-mongoose.connect(db_config.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(db_config.DB_URL);
 const db = mongoose.connection;
 
 db.once("open", () => {
