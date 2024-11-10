@@ -48,7 +48,7 @@ async function init() {
             userId: "admin",
             email: "paarthmonga28@gmail.com",
             userType: "ADMIN",
-            password: bcrypt.hashSync("qwer4321", 8)
+            password: bcrypt.hashSync("qwer4321", 8) // salt based hashing -> 8 acts as salt means which extend to which the password must be converted so it becomes more complicated to decrypt more the salt number, more complucated the password will be encrypted
         });
         console.log("Admin created", user);
     } catch (err) {
