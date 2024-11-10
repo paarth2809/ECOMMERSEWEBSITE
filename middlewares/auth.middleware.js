@@ -4,24 +4,28 @@ const auth_config = require('../configs/auth.config');
 
 const verifySignUpBody = async (req, res, next) => {
     try {
+        // check for name
         if (!req.body.name) {
             return res.status(400).send({
                 message: "Name not provided in request body"
             });
         }
 
+        // check for email
         if (!req.body.email) {
             return res.status(400).send({
                 message: "Email not provided in request body"
             });
         }
 
+        // check for user id
         if (!req.body.userId) {
             return res.status(400).send({
                 message: "UserId not provided in request body"
             });
         }
 
+    // check if user id already present or not
         const user = await user_model.findOne({ userId: req.body.userId });
         if (user) {
             return res.status(400).send({
@@ -42,7 +46,7 @@ const verifySignInBody = async (req, res, next) => {
     try {
         if (!req.body.userId) {
             return res.status(400).send({
-                message: "Username not provided in request body"
+                message: "Userid not provided in request body"
             });
         }
 
@@ -72,6 +76,7 @@ const verifyToken = (req, res, next) => {
         });
     }
 
+    // check if its valid token
     jwt.verify(token, auth_config.secretMessage, async (err, decoded) => {
         if (err) {
             return res.status(401).send({
@@ -97,13 +102,15 @@ const isAdmin=(req,res,next)=>{
         next();
     else{
         return res.status(403).send({
-            message: "only admin user allowed"
+            message: "only admin user allowed to access this endpoint"
         })
     }
+    next()
 }
 
 const isValidUser=(req,res,next)=>{
     const user=req.user
+    // user.name is the name assigned while generating token
     if(user && user.name==req.body.user_name)
         next();
     else{

@@ -4,6 +4,11 @@ const jwt = require('jsonwebtoken');
 const secret_message = require('../configs/auth.config');
 
 exports.signup = async (req, res) => {
+    // create user
+    // 1. read request body
+    // 2. insert data in users collection in mongoDB
+    // 3. return response back to user
+
     const req_body = req.body;
 
     const userObj = {
@@ -39,6 +44,10 @@ exports.signup = async (req, res) => {
 };
 
 exports.signin = async (req, res) => {
+    // check if user id is present in db
+    // check for password
+    // create token using jwt
+
     const user = await user_model.findOne({ userId: req.body.userId });
 
     if (!user) {

@@ -9,6 +9,7 @@ const app = express();
 app.use(express.json());
 
 // stitch route to server
+// if server se call ai to usko kon se route pe jana
 require('./routes/auth.route')(app);
 require('./routes/category.route')(app);
 require('./routes/product.route')(app);

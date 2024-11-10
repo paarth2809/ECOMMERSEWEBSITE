@@ -2,6 +2,11 @@ const category_model = require('../models/category.model');
 
 // Create category
 exports.createCategory = async (req, res) => {
+    // read the req body
+    // create category object
+    // insert into mongoDB
+    // return the response of created category
+    
     const category_obj = req.body;
 
     try {
