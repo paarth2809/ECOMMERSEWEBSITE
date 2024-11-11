@@ -110,7 +110,7 @@ const isAdmin=(req,res,next)=>{
 
 const isValidUser=(req,res,next)=>{
     const user=req.user
-    // user.name is the name assigned while generating token
+    // user.name is the name assigned while generating token 
     if(user && user.name==req.body.user_name)
         next();
     else{
